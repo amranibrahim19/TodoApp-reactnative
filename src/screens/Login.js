@@ -18,7 +18,7 @@ const Login = props => {
     const hideModal = () => setVisible(false);
     const containerStyle = { backgroundColor: 'white', padding: 20 };
 
-    const [identifier, setIdentifier] = React.useState('');
+    const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [visible, setVisible] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
@@ -27,7 +27,7 @@ const Login = props => {
     const validateInput = () => {
         let errors = false;
 
-        if (!identifier || identifier.length === 0) {
+        if (!email || email.length === 0) {
             errors = true;
         }
 
@@ -41,7 +41,7 @@ const Login = props => {
     const authenticateUser = async () => {
         if (validateInput()) {
             setLoading(true);
-            const user = new UserModel(identifier, password);
+            const user = new UserModel(email , password);
 
             try {
                 await user.login();
@@ -74,10 +74,10 @@ const Login = props => {
             <>
                 <View style={styles.divider} />
                 <TextInput
-                    onChangeText={text => setIdentifier(text)}
+                    onChangeText={text => setEmail(text)}
                     label="*Username or email"
                     placeholder="*Username or email"
-                    value={identifier}
+                    value={email}
                 >
                 </TextInput>
             </>
@@ -118,15 +118,6 @@ const Login = props => {
                         {error}
                     </Snackbar>
                 </Portal>
-
-                <Portal>
-                    <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
-                        <Text>Example Modal.  Click outside this area to dismiss.</Text>
-                    </Modal>
-                </Portal>
-                <Button style={{ marginTop: 30 }} onPress={showModal}>
-                    Show
-                </Button>
             </>
         </View>
     );

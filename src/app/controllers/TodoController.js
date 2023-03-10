@@ -1,6 +1,6 @@
 import { store } from '../../redux/Store';
 
-const url = 'http://localhost:1337/todos';
+const url = 'http://192.168.1.178:8001/';
 
 
 export const save = async todo => {
@@ -15,7 +15,7 @@ export const save = async todo => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${store.getState().jwt}`
+            'Authorization': `Bearer ${store.getState().token}`
         },
         body: requestBody
     };
@@ -42,7 +42,7 @@ export const edit = async todo => {
     const requestConfig = {
         method: 'PUT',
         headers: {
-            'Authorization': `Bearer ${store.getState().jwt}`,
+            'Authorization': `Bearer ${store.getState().token}`,
             'Content-Type': 'application/json',
         },
         body: requestBody
@@ -60,7 +60,7 @@ export const edit = async todo => {
 
 export const dissmiss = async todo => {
     const response = await fetch(`${url}/${todo._id}`, {
-        headers: { Authorization: `Bearer ${store.getState().jwt}` },
+        headers: { Authorization: `Bearer ${store.getState().token}` },
     });
 
     const json = await response.json();

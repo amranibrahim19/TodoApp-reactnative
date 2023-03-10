@@ -1,8 +1,8 @@
 import { login, logout } from '../controllers/UserController';
 
 class UserModel {
-    constructor(identifier, password) {
-        this.identifier = identifier;
+    constructor(email, password) {
+        this.email = email;
         this.password = password;
     }
 
@@ -10,7 +10,8 @@ class UserModel {
         const result = await login(this);
 
         if (!result) {
-            throw new Error('Error logging in');
+            // throw new Error('Error logging in');
+            alert(result);
         }
 
         return true;
